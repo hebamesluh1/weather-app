@@ -1,4 +1,6 @@
 import React from 'react'
+
+//style 
 import {
     WeatherContainer,
     Condition,
@@ -10,7 +12,12 @@ import {
     InfoIcon,
     InfoLabel
 } from './style'
+
+//data 
 import { WeatherInfoIcons, WeatherIcons } from '../../mock/data';
+
+
+//components 
 const WeatherInfoComponents = ({ name, value }) => {
     return <>
         <InfoContainer>
@@ -22,11 +29,16 @@ const WeatherInfoComponents = ({ name, value }) => {
         </InfoContainer>
     </>
 }
+
+
 const Weather = ({ weather }) => {
+
     const isDay = weather?.weather[0].icon?.includes('d')
     const getTime = (timeStamp) => {
         return `${new Date(timeStamp * 1000).getHours()} : ${new Date(timeStamp * 1000).getMinutes()}`
     }
+
+
     return (
         <>
             <WeatherContainer>
@@ -55,7 +67,6 @@ const Weather = ({ weather }) => {
                         name="pressure"
                         value={weather?.main?.pressure}
                     />
-
                 </WeatherInfoContainer>
             </WeatherInfoContainer>
         </>

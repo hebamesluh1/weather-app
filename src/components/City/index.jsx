@@ -1,4 +1,6 @@
+//style
 import { WeatherLogo, ChooseCityLabel, SearchBox } from './style';
+
 import logo from '../../assets/perfect-day.svg';
 import Spinner from '../Spinner';
 
