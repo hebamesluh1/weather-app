@@ -1,15 +1,15 @@
-import Search from "./components/Search"
-
+import City from "./components/City"
+import Weather from "./components/Weather"
+import { AppLabel } from "./global/component"
 
 function App() {
 
-  const handleSearch=(searchData)=>{
-    console.log(searchData)
-  }
 
   return (
     <div className="app">
-      <Search onSearchChange={handleSearch}/>
+      <AppLabel>Weather App</AppLabel>
+      {/* <City/> */}
+      <Weather/>
     </div>
   )
 }
