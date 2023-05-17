@@ -1,14 +1,15 @@
 import { WeatherLogo ,ChooseCityLabel,SearchBox} from './style';
 import logo from '../../assets/perfect-day.svg';
 
-const City = () => {
+const City = ({updateCity,fetchWeather}) => {
   return (
     <>
     <WeatherLogo src={logo} alt="logo"/>
     <ChooseCityLabel>Find Weather of your city </ChooseCityLabel>
-    <SearchBox>
-        <input type="text" />
-        <button>Search</button>
+    <SearchBox onSubmit={fetchWeather}>
+        <input type="text" placeholder='city' onChange={(e)=>updateCity(e.target.value)}/>
+        {/* <button type="submit">{loading?'Loading...':Search}</button> */}
+        <button type="submit">Search</button>
     </SearchBox>
     </>
   )

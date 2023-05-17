@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../../assets/cloudy.svg'
 import {
     WeatherContainer,
     Condition,
@@ -11,7 +10,7 @@ import {
     InfoIcon,
     InfoLabel
 } from './style'
-import { WeatherInfoIcons, WeatherInfoLabels } from '../../mock/data';
+import { WeatherInfoIcons, WeatherIcons } from '../../mock/data';
 const WeatherInfoComponents = ({ name, value }) => {
     return <>
         <InfoContainer>
@@ -23,24 +22,40 @@ const WeatherInfoComponents = ({ name, value }) => {
         </InfoContainer>
     </>
 }
-const Weather = () => {
+const Weather = ({ weather }) => {
+    const isDay = weather?.weather[0].icon?.includes('d')
+    const getTime = (timeStamp) => {
+        return `${new Date(timeStamp * 1000).getHours()} : ${new Date(timeStamp * 1000).getMinutes()}`
+    }
     return (
         <>
             <WeatherContainer>
-                <Condition><span>30ْ C</span> Cloudy</Condition>
-                <WeatherIcon src={logo} alt="icon" />
+                <Condition>
+                    <span>{`${Math.floor(weather?.main?.temp - 273)}°C`}</span>
+                    {`  |  ${weather?.weather[0].description}`}</Condition>
+                <WeatherIcon src={WeatherIcons[weather?.weather[0].icon]} alt="icon" />
             </WeatherContainer>
-            <Location>London , GB </Location>
+            <Location>{weather?.name} , {weather?.sys?.country} </Location>
             <WeatherInfoLabel>Weather info</WeatherInfoLabel>
             <WeatherInfoContainer>
                 <WeatherInfoContainer>
-                    {WeatherInfoLabels.map((info, index) => (
-                        <WeatherInfoComponents
-                            name={info}
-                            key={index}
-                            value="6543"
-                        />
-                    ))}
+                    <WeatherInfoComponents
+                        name={isDay ? "sunset" : "sunrise"}
+                        value={`${getTime(weather?.sys[isDay ? "sunset" : "sunrise"])}`}
+                    />
+                    <WeatherInfoComponents
+                        name="humidity"
+                        value={weather?.main?.humidity}
+                    />
+                    <WeatherInfoComponents
+                        name="wind"
+                        value={weather?.wind?.speed}
+                    />
+                    <WeatherInfoComponents
+                        name="pressure"
+                        value={weather?.main?.pressure}
+                    />
+
                 </WeatherInfoContainer>
             </WeatherInfoContainer>
         </>
